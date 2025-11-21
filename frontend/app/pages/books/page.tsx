@@ -1,17 +1,18 @@
+import {client} from '@/app/global/sanity/client'
+import {BOOKS_QUERY} from '@/app/pages/books/api/fetchBooks'
+import { BookModel } from '@/app/pages/books/model/books'
+import Link from 'next/link'
 
-export default async function Books(props: {
-  searchParams?: Promise<{
-    query?: string;
-    page?: string;
-  }>;
-}) {
-
-  const searchParams = await props.searchParams;
-
+export default async function PostIndex() {
+  const books: BookModel[] = await client.fetch(BOOKS_QUERY)
 
   return (
-    <div className="grid h-full w-full bg-zinc-50 font-sans dark:bg-black">
-      <h1>page</h1>
-    </div>
-  );
+    <ul>
+      {books.map((book) => (
+        <li key={book._id}>
+          <Link href={`/pages/books/${book?.number}`}>{book?.title}</Link>
+        </li>
+      ))}
+    </ul>
+  )
 }
