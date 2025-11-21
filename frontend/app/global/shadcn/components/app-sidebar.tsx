@@ -19,18 +19,18 @@ const items = [
     icon: Home,
   },
   {
-    title: "Pending",
-    url: "/pages/pending",
+    title: "Books",
+    url: "/pages/books",
     icon: Inbox,
   },
   {
-    title: "Draft",
-    url: "/pages/draft",
+    title: "Movies",
+    url: "/pages/movies",
     icon: Calendar,
   },
   {
-    title: "Fetched",
-    url: "/pages/fetch",
+    title: "Music",
+    url: "/pages/music",
     icon: Search,
   },
   {
