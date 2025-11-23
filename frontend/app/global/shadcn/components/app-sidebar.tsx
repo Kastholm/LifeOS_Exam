@@ -10,12 +10,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/app/global/shadcn/components/ui/sidebar"
+import ChuckNorris from "../../components/chuck_norris_jokes"
 
 // Menu items.
 const items = [
   {
-    title: "Published",
-    url: "/",
+    title: "News",
+    url: "/pages/news",
     icon: Home,
   },
   {
@@ -62,6 +63,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <ChuckNorris />
     </Sidebar>
   )
 }
