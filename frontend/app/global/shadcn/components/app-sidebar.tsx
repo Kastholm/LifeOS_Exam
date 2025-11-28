@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Newspaper, Book, Film, Music, Utensils, NotebookPen } from "lucide-react"
 
 import {
   Sidebar,
@@ -15,29 +15,34 @@ import ChuckNorris from "../../components/chuck_norris_jokes"
 // Menu items.
 const items = [
   {
-    title: "News",
+    title: "News 1",
     url: "/pages/news",
-    icon: Home,
+    icon: Newspaper,
   },
   {
-    title: "Books",
+    title: "Books 1",
     url: "/pages/books",
-    icon: Inbox,
+    icon: Book,
   },
   {
-    title: "Movies",
+    title: "Movies 1",
     url: "/pages/movies",
-    icon: Calendar,
+    icon: Film,
   },
   {
-    title: "Music",
+    title: "Music 1",
     url: "/pages/music",
-    icon: Search,
+    icon: Music,
   },
   {
-    title: "Settings",
+    title: "Food",
+    url: "/pages/food",
+    icon: Utensils,
+  },
+  {
+    title: "MonthBook",
     url: "#",
-    icon: Settings,
+    icon: NotebookPen,
   },
 ]
 
