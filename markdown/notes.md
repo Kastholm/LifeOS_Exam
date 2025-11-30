@@ -16,6 +16,12 @@ New York Times API 3
 Sanity API - Books, Food, Notes, Monthbook
 Trakt.tv - Movies
  '''
+ • “Include an infobox…”
+Du skal lave en boks på siden med vigtig info (fx navn, titel, dato, stats).
+Tænk Wikipedia-infoboks.
+
+3. “Utilize data retrieved through SPARQL queries from DBpedia.”
+Du skal lave en SPARQL-forespørgsel til DBpedia og bruge resultatet i dit projekt – fx ekstra fakta om en person, film, lokation osv.
 ### 2. Content and Features
 - Integrate data from at least three different APIs, of which two must be covered in class.
 
