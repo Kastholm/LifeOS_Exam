@@ -9,9 +9,6 @@ Develop a website based on a topic of your choice. The website must meet the fol
 - The website must consist of at least one fully functional page.
 - The page(s) must resemble a cohesive and user-friendly site.
 
-### 2. Content and Features
-- Integrate data from at least three different APIs, of which two must be covered in class.
-
 '''I will use:
 https://api.chucknorris.io/ 1
 youtube - vidoes - liked music 2
@@ -19,6 +16,8 @@ New York Times API 3
 Sanity API - Books, Food, Notes, Monthbook
 Trakt.tv - Movies
  '''
+### 2. Content and Features
+- Integrate data from at least three different APIs, of which two must be covered in class.
 
 - Include an infobox displaying essential information.
 - Utilize data retrieved through SPARQL queries from DBpedia.

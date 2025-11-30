@@ -35,13 +35,13 @@ const items = [
     icon: Music,
   },
   {
-    title: "Food",
+    title: "Food 1",
     url: "/pages/food",
     icon: Utensils,
   },
   {
-    title: "MonthBook",
-    url: "#",
+    title: "MonthBook 1",
+    url: "/pages/monthbook",
     icon: NotebookPen,
   },
 ]
