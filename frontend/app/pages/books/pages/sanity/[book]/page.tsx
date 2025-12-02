@@ -1,7 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
-import { BookModel } from "../model/books";
+import { client } from "@/app/global/sanity/client"
+import { BOOK_QUERY } from "../../../api/FetchSanityBooks"
+import { BookModel } from "../../../models/sanity_book"
 import { PortableText, PortableTextComponents } from "@portabletext/react";
+import Link from "next/link";
+
 
 const components: PortableTextComponents = {
     block: {
@@ -22,7 +24,31 @@ const components: PortableTextComponents = {
     },
 };
 
-export default function SingularBook({ book }: { book: BookModel }) {
+export default async function SingularBook({ params }: { params: { book: string } }) {
+    
+    const { book: bookParam } = await params
+    const bookNumber = Number(bookParam)
+    const bookData: BookModel | null = await client.fetch(BOOK_QUERY, { book: bookNumber })
+
+    if (!bookData) {
+        return (
+            <div className="min-h-screen bg-background flex items-center justify-center">
+                <div className="text-center">
+                    <p className="text-muted-foreground text-lg mb-2">Bog ikke fundet</p>
+                    <p className="text-sm text-muted-foreground/70">Bog nummer: {bookNumber}</p>
+                    <Link 
+                        href="/pages/books"
+                        className="inline-flex items-center gap-2 text-sm text-primary hover:underline mt-4"
+                    >
+                        ← Tilbage til alle bøger
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
+    const book = bookData;
+
     const formattedDate = book.date ? new Date(book.date).toLocaleDateString('da-DK', {
         year: 'numeric',
         month: 'long',
