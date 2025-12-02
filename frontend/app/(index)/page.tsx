@@ -90,21 +90,18 @@ export default async function Home() {
           <Link 
             key={section.title} 
             href={section.url}
-            className="group relative flex flex-col bg-card border border-border/60 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/50"
+            className="group relative flex flex-col bg-card border border-border/60 rounded-2xl px-6 py-2 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/50"
           >
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between">
               <div className={`p-3 rounded-xl ${section.color}`}>
                 <section.icon className="w-6 h-6" />
               </div>
-              <ArrowRight className="w-5 h-5 text-muted-foreground/50 group-hover:text-primary transition-colors" />
-            </div>
-            
             <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
               {section.title}
             </h3>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">
-              {section.description}
-            </p>
+              <ArrowRight className="w-5 h-5 text-muted-foreground/50 group-hover:text-primary transition-colors" />
+            </div>
+            
             
             <div className="h-1 w-0 bg-primary/20 rounded-full group-hover:w-full transition-all duration-500" />
           </Link>
@@ -125,7 +122,6 @@ export default async function Home() {
             title="Dash Analytics"
          />
       </div>
-
     </div>
   );
 }

@@ -21,15 +21,15 @@ export default function MovieToggle() {
     }
 
     return (
-        <div className="flex justify-center mb-8">
-            <div className='inline-flex h-12 items-center justify-center rounded-full bg-muted/50 p-1.5 text-muted-foreground border border-border/40'>
+        <div className="shrink-0">
+            <div className='inline-flex h-14 items-center justify-center rounded-full bg-card border border-border/60 p-1.5 text-muted-foreground shadow-lg'>
                 <button 
                     onClick={() => setMovieType('history')}
                     className={cn(
-                        "inline-flex min-w-[120px] items-center justify-center whitespace-nowrap rounded-full px-6 py-2 text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+                        "inline-flex min-w-[140px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-8 py-3 text-base font-semibold ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
                         currentType === 'history' 
-                            ? "bg-background text-primary shadow-sm font-semibold scale-105" 
-                            : "hover:bg-background/50 hover:text-foreground"
+                            ? "bg-primary text-primary-foreground shadow-md scale-[1.02]" 
+                            : "hover:bg-muted/50 hover:text-foreground"
                     )}
                 >
                     History
@@ -37,10 +37,10 @@ export default function MovieToggle() {
                 <button 
                     onClick={() => setMovieType('watchlist')}
                     className={cn(
-                        "inline-flex min-w-[120px] items-center justify-center whitespace-nowrap rounded-full px-6 py-2 text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+                        "inline-flex min-w-[140px]  cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-8 py-3 text-base font-semibold ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
                         currentType === 'watchlist' 
-                            ? "bg-background text-primary shadow-sm font-semibold scale-105" 
-                            : "hover:bg-background/50 hover:text-foreground"
+                            ? "bg-primary text-primary-foreground shadow-md scale-[1.02]" 
+                            : "hover:bg-muted/50 hover:text-foreground"
                     )}
                 >
                     Watchlist

@@ -20,32 +20,32 @@ const items = [
     icon: Home,
   },
   {
-    title: "News 1",
+    title: "News",
     url: "/pages/news",
     icon: Newspaper,
   },
   {
-    title: "Books 1",
+    title: "Books",
     url: "/pages/books",
     icon: Book,
   },
   {
-    title: "Movies 1",
+    title: "Movies",
     url: "/pages/movies",
     icon: Film,
   },
   {
-    title: "Music 1",
+    title: "Music",
     url: "/pages/music",
     icon: Music,
   },
   {
-    title: "Food 1",
+    title: "Food",
     url: "/pages/food",
     icon: Utensils,
   },
   {
-    title: "MonthBook 1",
+    title: "MonthBook",
     url: "/pages/monthbook",
     icon: NotebookPen,
   },

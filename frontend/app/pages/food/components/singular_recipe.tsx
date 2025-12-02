@@ -99,9 +99,6 @@ export default function SingularRecipe({ recipe }: { recipe: RecipeModel }) {
                         <div className="lg:w-[70%] space-y-8">
                             {recipe.description && (
                                 <div>
-                                    <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2 text-foreground/90">
-                                        <span className="text-primary">📖</span> Fremgangsmåde
-                                    </h2>
                                     <div className="bg-muted/30 p-6 rounded-xl border border-border/40">
                                         <PortableText value={recipe.description} components={components} />
                                     </div>
