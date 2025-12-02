@@ -1,6 +1,6 @@
 
 import { Suspense } from "react";
-import FetchWatchList from "./api/FetchMovies";
+import FetchWatchList from "./api/FetchTraktMovies";
 import Movie from "./components/movie";
 import MovieToggle from "./components/toggle";
 import { MovieModel } from "./models/MovieModel";

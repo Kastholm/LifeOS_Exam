@@ -3,10 +3,10 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { cn } from "@/app/global/shadcn/lib/utils";
 
 export default function MovieToggle() {
-
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
+
     
     const currentType = searchParams.get('movie_type') || 'watchlist';
 
