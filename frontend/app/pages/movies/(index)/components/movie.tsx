@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MovieModel } from "../models/MovieModel";
-import { Film } from "lucide-react";
+import { Film, Info } from "lucide-react";
 import Image from "next/image";
 
 // Logo URLs
@@ -15,103 +15,102 @@ export default function Movie({ movie }: { movie: MovieModel }) {
         month: 'short',
         day: 'numeric'
     });
-
-    // Prøv at finde et passende billede: fanart > thumb > poster
+    
     const imageUrl = movie.movie.images?.fanart?.[0] || 
                      movie.movie.images?.thumb?.[0] || 
                      movie.movie.images?.poster?.[0];
     
     return (
         <div
-            className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 p-0 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-lg bg-card"
+            className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-xl bg-card"
+            style={{ aspectRatio: '2/3' }}
         >
-            <div className="h-0.5 w-full bg-linear-to-r from-primary/70 via-primary to-primary/60 opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-            
-            <div className="relative mx-4 mt-4 rounded-xl border border-border/40 bg-muted/30 shadow-sm ring-1 ring-white/5 backdrop-blur overflow-hidden aspect-video flex items-center justify-center">
-                {imageUrl ? (
+            {imageUrl ? (
+                <>
                     <img 
                         src={`https://${imageUrl}`} 
                         alt={movie.movie.title}
-                        className="w-full h-full object-cover transition duration-700 ease-out group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full object-cover transition duration-700 ease-out group-hover:scale-110"
                         loading="lazy"
                     />
-                ) : (
-                    <Film className="w-12 h-12 text-muted-foreground/40 group-hover:text-primary/60 transition-colors duration-300" />
-                )}
-            </div>
-            
-            <div className="flex flex-1 flex-col gap-3 px-6 pb-6 pt-5 text-foreground">
-                <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.16em] text-muted-foreground/80">
-                    <span className="rounded-full border border-border/40 px-2.5 py-1 font-medium">
+                    <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/40 to-background/95" />
+                </>
+            ) : (
+                <div className="absolute inset-0 bg-muted/30 flex items-center justify-center">
+                    <Film className="w-16 h-16 text-muted-foreground/40 group-hover:text-primary/60 transition-colors duration-300" />
+                </div>
+            )}
+
+            {/* Indhold der ligger ovenpå billedet */}
+            <div className="relative z-10 flex flex-1 flex-col justify-end p-4 text-foreground">
+
+                <div className="flex items-center justify-between mb-auto pb-3">
+                    <span className="rounded-full border border-white/20 bg-background/80 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-semibold text-foreground shadow-lg">
                         {movie.movie.year}
                     </span>
-                    <span className="font-medium text-muted-foreground/70">
+                    <span className="rounded-full border border-white/20 bg-background/80 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-semibold text-foreground shadow-lg">
                         {formattedDate}
                     </span>
                 </div>
-                
-                <div className="space-y-2 mb-8">
-                    <h3 className="text-lg font-semibold leading-snug tracking-tight transition-colors duration-300 group-hover:text-primary line-clamp-2">
+
+                {/* Titel */}
+                <div className="mb-3">
+                    <h3 className="text-lg font-bold leading-tight tracking-tight text-white drop-shadow-lg mb-2 line-clamp-2 group-hover:text-white/90 transition-colors duration-300">
                         {movie.movie.title}
                     </h3>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-2">
+                        <Link 
+                            href={`https://trakt.tv/movies/${movie.movie.ids.slug}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center w-9 h-9 rounded-lg bg-background/90 backdrop-blur-sm border border-white/20 hover:bg-background hover:scale-110 transition-all duration-200 group/link shadow-lg"
+                            title="Se på Trakt"
+                        >
+                            <img 
+                                src={TRAKT_LOGO} 
+                                alt="Trakt logo" 
+                                className="w-4 h-4 object-contain"
+                            />
+                        </Link>
+                        <Link 
+                            href={`https://www.rottentomatoes.com/search?search=${movie.movie.title.toLowerCase()}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center w-9 h-9 rounded-lg bg-background/90 backdrop-blur-sm border border-white/20 hover:bg-background hover:scale-110 transition-all duration-200 group/link shadow-lg"
+                            title="Se på Rotten Tomatoes"
+                        >
+                            <img 
+                                src={ROTTEN_TOMATOES_LOGO} 
+                                alt="Rotten Tomatoes logo" 
+                                className="w-4 h-4 object-contain"
+                            />
+                        </Link>
+                        <Link 
+                            href={`/pages/movies/pages/dbpedia/${movie.movie.ids.slug}?title=${movie.movie.title}`}
+                            className="flex items-center justify-center w-9 h-9 rounded-lg bg-background/90 backdrop-blur-sm border border-white/20 hover:bg-background hover:scale-110 transition-all duration-200 group/link shadow-lg"
+                            title="Se på DBpedia"
+                        >
+                            <img 
+                                src={DBPEDIA_LOGO} 
+                                alt="DBpedia logo" 
+                                className="w-4 h-4 object-contain"
+                            />
+                        </Link>
+                    </div>
+
                     <Link 
-                        href={`https://trakt.tv/movies/${movie.movie.ids.slug}`} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-muted-foreground/70 hover:opacity-80 transition-opacity duration-200 group/link"
-                        title="Se på Trakt"
+                        href={`/pages/movies/pages/tmdb/${movie.movie.ids.imdb}`} 
+                        className="ml-auto flex items-center justify-center h-9 px-3.5 rounded-lg bg-white/20 backdrop-blur-md border border-white/40 hover:bg-white/30 hover:border-white/50 transition-all duration-300 shadow-lg hover:shadow-xl group/button"
                     >
-                        <img 
-                            src={TRAKT_LOGO} 
-                            alt="Trakt logo" 
-                            className="w-4 h-4 object-contain group-hover/link:scale-110 transition-transform duration-200"
-                        />
-                        <span className="text-xs font-medium">Trakt</span>
-                    </Link>
-                    <Link 
-                        href={`https://www.rottentomatoes.com/search?search=${movie.movie.title.toLowerCase()}`} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-muted-foreground/70 hover:opacity-80 transition-opacity duration-200 group/link"
-                        title="Se på Rotten Tomatoes"
-                    >
-                        <img 
-                            src={ROTTEN_TOMATOES_LOGO} 
-                            alt="Rotten Tomatoes logo" 
-                            className="w-4 h-4 object-contain group-hover/link:scale-110 transition-transform duration-200"
-                        />
-                        <span className="text-xs font-medium">RT</span>
-                    </Link>
-                    <Link 
-                        href={`/pages/movies/pages/tmdb/${movie.movie.ids.imdb}`}
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-muted-foreground/70 hover:opacity-80 transition-opacity duration-200 group/link"
-                        title="Se på TMDB"
-                    >
-                        <img 
-                            src={TMDB_LOGO} 
-                            alt="TMDB logo" 
-                            className="w-4 h-4 object-contain group-hover/link:scale-110 transition-transform duration-200"
-                        />
-                        <span className="text-xs font-medium">TMDB</span>
-                    </Link>
-                    <Link href={`/pages/movies/pages/dbpedia/${movie.movie.ids.slug}?title=${movie.movie.title}`} 
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-muted-foreground/70 hover:opacity-80 transition-opacity duration-200 group/link"
-                        title="Se på DBpedia"
-                    >
-                        <img 
-                            src={DBPEDIA_LOGO} 
-                            alt="DBpedia logo" 
-                            className="w-4 h-4 object-contain group-hover/link:scale-110 transition-transform duration-200"
-                        />
-                        <span className="text-xs font-medium">DBpedia</span>
+                        <span className="text-xs font-semibold text-zinc-800 flex items-center gap-1.5 tracking-wide">
+                            <Info className="w-3.5 h-3.5" />
+                            Info
+                        </span>
                     </Link>
                 </div>
-
             </div>
         </div>
     )
