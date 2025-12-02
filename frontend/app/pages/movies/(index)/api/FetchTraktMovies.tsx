@@ -30,7 +30,7 @@ export default async function FetchWatchList({type} : {type: string}) {
       const title = movie.movie.title
     
       // Find om der allerede findes en film med samme titel
-      const exists = list.some(m => m.movie.title === title)
+      const exists = list.some((m: any) => m.movie.title === title)
     
       if (exists) return list
     
