@@ -1,5 +1,6 @@
 import { fetchMusic } from "./api/fetchMusic";
-import Image from "next/image";
+import { Music as MusicIcon, Info } from "lucide-react";
+import Link from "next/link";
 
 export default async function Music() {
   const data = await fetchMusic();
@@ -8,7 +9,7 @@ export default async function Music() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Min Musik</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {items.map((item: any, index: number) => {
           const snippet = item.snippet;
           const videoId = snippet.resourceId?.videoId;
@@ -19,53 +20,65 @@ export default async function Music() {
           }) : null;
 
           return (
-            <a
+            <div
               key={item.id || index}
-              href={`https://www.youtube.com/watch?v=${videoId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 p-0 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-lg"
+              className="group relative flex h-[380px] w-full flex-col overflow-hidden rounded-2xl border border-border/60 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-xl bg-card"
+              style={{ aspectRatio: '2/3' }}
             >
-              <div className="h-0.5 w-full bg-linear-to-r from-primary/70 via-primary to-primary/60 opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-              {thumbnail && (
-                <div className="relative mx-4 mt-4 rounded-xl border border-border/40 bg-card/80 shadow-sm ring-1 ring-white/5 backdrop-blur overflow-hidden aspect-video">
-                  <Image
-                    alt={snippet.title ?? "Music thumbnail"}
-                    width={480}
-                    height={360}
+              {thumbnail ? (
+                <>
+                  <img 
                     src={thumbnail}
-                    className="w-full h-full object-cover transition duration-700 ease-out group-hover:scale-105"
+                    alt={snippet.title ?? "Music thumbnail"}
+                    className="absolute inset-0 w-full h-[500px] mt-[-65px] object-cover transition duration-700 ease-out group-hover:scale-110"
+                    loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/20 to-black" />
+                </>
+              ) : (
+                <div className="absolute inset-0 bg-muted/30 flex items-center justify-center">
+                  <MusicIcon className="w-16 h-16 text-muted-foreground/40 group-hover:text-primary/60 transition-colors duration-300" />
                 </div>
               )}
-              <div className="flex flex-1 flex-col gap-3 px-6 pb-6 pt-5 text-foreground">
-                <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.16em] text-muted-foreground/80">
-                  <span className="rounded-full border border-border/40 px-2.5 py-1 font-medium">
+
+              <div className="relative z-10 flex flex-1 flex-col justify-end p-4 text-foreground">
+                <div className="flex items-center justify-between mb-auto pb-3">
+                  <span className="rounded-full border border-white/20 bg-background/80 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-semibold text-foreground shadow-lg">
                     #{index + 1}
                   </span>
                   {publishedAt && (
-                    <span className="font-medium text-muted-foreground/70">
+                    <span className="rounded-full border border-white/20 bg-background/80 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-semibold text-foreground shadow-lg">
                       {publishedAt}
                     </span>
                   )}
                 </div>
-                <div className="space-y-2">
-                  <h2 className="text-lg font-semibold leading-snug tracking-tight transition-colors duration-300 group-hover:text-primary line-clamp-2">
+
+                <div className="mb-3">
+                  <h2 className="text-xl font-bold leading-tight tracking-tight text-white drop-shadow-lg mb-2 line-clamp-2 group-hover:text-white/90 transition-colors duration-300">
                     {snippet.title}
                   </h2>
                   {snippet.channelTitle && (
-                    <p className="text-xs text-muted-foreground/70">
+                    <p className="text-xs text-white/80 drop-shadow-md">
                       {snippet.channelTitle}
                     </p>
                   )}
                 </div>
-                <div className="mt-auto flex items-center justify-end">
-                  <span className="text-lg leading-none text-muted-foreground/60 group-hover:text-primary transition-colors">
-                    ↗
-                  </span>
+
+                <div className="flex items-center justify-end">
+                  <Link 
+                    href={`https://www.youtube.com/watch?v=${videoId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center h-9 px-3.5 rounded-lg bg-white/90 backdrop-blur-md border border-white/40 hover:bg-white/30 hover:border-white/50 transition-all duration-300 shadow-lg hover:shadow-xl group/button"
+                  >
+                    <span className="text-xs font-semibold text-zinc-800 flex items-center gap-1.5 tracking-wide">
+                      <Info className="w-3.5 h-3.5" />
+                      Info
+                    </span>
+                  </Link>
                 </div>
               </div>
-            </a>
+            </div>
           );
         })}
       </div>

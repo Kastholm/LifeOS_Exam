@@ -15,7 +15,7 @@ export default function Movie({ movie }: { movie: MovieModel }) {
         month: 'short',
         day: 'numeric'
     });
-    
+
     const imageUrl = movie.movie.images?.fanart?.[0] || 
                      movie.movie.images?.thumb?.[0] || 
                      movie.movie.images?.poster?.[0];
@@ -33,7 +33,7 @@ export default function Movie({ movie }: { movie: MovieModel }) {
                         className="absolute inset-0 w-full h-full object-cover transition duration-700 ease-out group-hover:scale-110"
                         loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/40 to-background/95" />
+                    <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/20 to-black" />
                 </>
             ) : (
                 <div className="absolute inset-0 bg-muted/30 flex items-center justify-center">
@@ -41,7 +41,6 @@ export default function Movie({ movie }: { movie: MovieModel }) {
                 </div>
             )}
 
-            {/* Indhold der ligger ovenpå billedet */}
             <div className="relative z-10 flex flex-1 flex-col justify-end p-4 text-foreground">
 
                 <div className="flex items-center justify-between mb-auto pb-3">
@@ -55,7 +54,7 @@ export default function Movie({ movie }: { movie: MovieModel }) {
 
                 {/* Titel */}
                 <div className="mb-3">
-                    <h3 className="text-lg font-bold leading-tight tracking-tight text-white drop-shadow-lg mb-2 line-clamp-2 group-hover:text-white/90 transition-colors duration-300">
+                    <h3 className="text-xl font-bold leading-tight tracking-tight text-white drop-shadow-lg mb-2 line-clamp-2 group-hover:text-white/90 transition-colors duration-300">
                         {movie.movie.title}
                     </h3>
                 </div>
@@ -103,7 +102,7 @@ export default function Movie({ movie }: { movie: MovieModel }) {
 
                     <Link 
                         href={`/pages/movies/pages/tmdb/${movie.movie.ids.imdb}`} 
-                        className="ml-auto flex items-center justify-center h-9 px-3.5 rounded-lg bg-white/20 backdrop-blur-md border border-white/40 hover:bg-white/30 hover:border-white/50 transition-all duration-300 shadow-lg hover:shadow-xl group/button"
+                        className="ml-auto flex items-center justify-center h-9 px-3.5 rounded-lg bg-white/90 backdrop-blur-md border border-white/40 hover:bg-white/30 hover:border-white/50 transition-all duration-300 shadow-lg hover:shadow-xl group/button"
                     >
                         <span className="text-xs font-semibold text-zinc-800 flex items-center gap-1.5 tracking-wide">
                             <Info className="w-3.5 h-3.5" />

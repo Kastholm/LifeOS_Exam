@@ -5,5 +5,5 @@ export class BookModel {
     image!: string;
     date!: string;
     completed!: string;
-    notes!: string;
+    notes!: any;
 }

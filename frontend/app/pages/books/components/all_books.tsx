@@ -1,54 +1,72 @@
 import Link from "next/link";
 import Image from "next/image";
 import { BookModel } from "../model/books";
+import { BookOpen, Info } from "lucide-react";
 
 export default function AllBooks(props: { books: BookModel[] }) {
     const { books } = props
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold mb-8">Alle Bøger</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {books.map((book) => (
-                    <Link 
-                        key={book._id} 
-                        href={`/pages/books/${book?.number}`}
-                        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 p-0 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-lg"
+                    <div
+                        key={book._id}
+                        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-xl bg-card"
+                        style={{ aspectRatio: '2/3' }}
                     >
-                        <div className="h-0.5 w-full bg-linear-to-r from-primary/70 via-primary to-primary/60 opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-                        {book.image && (
-                            <div className="relative mx-4 mt-4 rounded-xl border border-border/40 bg-card/80 shadow-sm ring-1 ring-white/5 backdrop-blur overflow-hidden">
-                                <Image
-                                    alt={book.title ?? "Book cover"}
-                                    width={300}
-                                    height={600}
+                        {book.image ? (
+                            <>
+                                <img 
                                     src={book.image}
-                                    className="max-h-72 md:max-h-96 w-full object-cover transition duration-700 ease-out group-hover:scale-105"
+                                    alt={book.title ?? "Book cover"}
+                                    className="absolute inset-0 w-full h-full object-cover transition duration-700 ease-out group-hover:scale-110"
+                                    loading="lazy"
                                 />
+                                <div className="absolute inset-0 bg-linear-to-b via-background/20 to-black" />
+                            </>
+                        ) : (
+                            <div className="absolute inset-0 bg-muted/30 flex items-center justify-center">
+                                <BookOpen className="w-16 h-16 text-muted-foreground/40 group-hover:text-primary/60 transition-colors duration-300" />
                             </div>
                         )}
-                        <div className="flex flex-1 flex-col gap-3 px-6 pb-6 pt-5 text-foreground">
-                            <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.16em] text-muted-foreground/80">
-                                <span className="rounded-full border border-border/40 px-2.5 py-1 font-medium">
+
+                        <div className="relative z-10 flex flex-1 flex-col justify-end p-4 text-foreground">
+                            <div className="flex items-center justify-between mb-auto pb-3">
+                                <span className="rounded-full border border-white/20 bg-background/80 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-semibold text-foreground shadow-lg">
                                     #{book.number}
                                 </span>
                                 {book.date && (
-                                    <span className="font-medium text-muted-foreground/70">
+                                    <span className="rounded-full border border-white/20 bg-background/80 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-semibold text-foreground shadow-lg">
                                         {new Date(book.date).getFullYear()}
                                     </span>
                                 )}
                             </div>
-                            <div className="space-y-2">
-                                <h2 className="text-lg font-semibold leading-snug tracking-tight transition-colors duration-300 group-hover:text-primary">
+
+                            <div className="mb-3">
+                                <h2 className="text-xl font-bold leading-tight tracking-tight text-white drop-shadow-lg mb-2 line-clamp-2 group-hover:text-white/90 transition-colors duration-300">
                                     {book.title}
                                 </h2>
                                 {book.completed && (
-                                    <p className="text-xs text-muted-foreground/70">
+                                    <p className="text-xs text-white/80 drop-shadow-md">
                                         {book.completed === "true" ? "✓ Læst" : "Ikke læst"}
                                     </p>
                                 )}
                             </div>
+
+                            <div className="flex items-center justify-end">
+                                <Link 
+                                    href={`/pages/books/${book?.number}`}
+                                    className="flex items-center justify-center h-9 px-3.5 rounded-lg bg-white/90 backdrop-blur-md border border-white/40 hover:bg-white/30 hover:border-white/50 transition-all duration-300 shadow-lg hover:shadow-xl group/button"
+                                >
+                                    <span className="text-xs font-semibold text-zinc-800 flex items-center gap-1.5 tracking-wide">
+                                        <Info className="w-3.5 h-3.5" />
+                                        Info
+                                    </span>
+                                </Link>
+                            </div>
                         </div>
-                    </Link>
+                    </div>
                 ))}
             </div>
         </div>
