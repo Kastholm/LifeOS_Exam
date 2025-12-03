@@ -53,7 +53,7 @@ const items = [
     title: "NoteBook",
     url: "/pages/notebook",
     icon: NotebookPen,
-  },
+  }
 ]
 
 export function AppSidebar() {

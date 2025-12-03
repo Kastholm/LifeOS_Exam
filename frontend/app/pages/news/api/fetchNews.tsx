@@ -24,7 +24,11 @@ export default async function FetchNews() {
         topics.map(async (topic) => {
             console.log(topic)
             try {
-                const res = await fetch(`https://api.nytimes.com/svc/topstories/v2/${topic}.json?api-key=${NY.api}`)
+                const res = await fetch(`https://api.nytimes.com/svc/topstories/v2/${topic}.json?api-key=${NY.api}`, {
+                    next: { 
+                        revalidate: 3600 // Cache for 1 hour (3600 seconds)
+                    }
+                })
                 return await res.json()
             } catch(err) {
                 console.error("No existing news, or couldn't fetch news for", topic)
