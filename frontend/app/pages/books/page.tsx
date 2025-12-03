@@ -6,12 +6,11 @@ import Link from 'next/link'
 
 export default async function AllBooks(props: { books: BookModel[] }) {
 
-    const DBPEDIA_LOGO = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png";
+    const GOOGLE_LOGO = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png";
 
     const books: BookModel[] = await client.fetch(BOOKS_QUERY)
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-8">Alle Bøger</h1>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {books.map((book) => (
                     <div
@@ -71,7 +70,7 @@ export default async function AllBooks(props: { books: BookModel[] }) {
                                         title="Se på DBpedia"
                                     >
                                         <img 
-                                            src={DBPEDIA_LOGO} 
+                                            src={GOOGLE_LOGO} 
                                             alt="DBpedia logo" 
                                             className="w-4 h-4 object-contain"
                                         />
