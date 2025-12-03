@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/app/global/shadcn/components/ui/button';
 import { Input } from '@/app/global/shadcn/components/ui/input';
 
 const CORRECT_CODE = process.env.NEXT_PUBLIC_MONTHBOOK_CODE; // Sæt i .env.local
 
-export default function Login() {
+function LoginForm() {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
@@ -28,29 +28,37 @@ export default function Login() {
   };
 
   return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <Input
+          type="password"
+          placeholder="Indtast kode"
+          value={code}
+          onChange={(e) => {
+            setCode(e.target.value);
+            setError('');
+          }}
+          className="w-full"
+        />
+        {error && (
+          <p className="text-sm text-red-500 mt-2">{error}</p>
+        )}
+      </div>
+      <Button type="submit" className="w-full">
+        Login
+      </Button>
+    </form>
+  );
+}
+
+export default function Login() {
+  return (
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="w-full max-w-md p-8 bg-card border border-border rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Input
-              type="password"
-              placeholder="Indtast kode"
-              value={code}
-              onChange={(e) => {
-                setCode(e.target.value);
-                setError('');
-              }}
-              className="w-full"
-            />
-            {error && (
-              <p className="text-sm text-red-500 mt-2">{error}</p>
-            )}
-          </div>
-          <Button type="submit" className="w-full">
-            Login
-          </Button>
-        </form>
+        <Suspense fallback={<div>Loading...</div>}>
+          <LoginForm />
+        </Suspense>
       </div>
     </div>
   );
