@@ -1,4 +1,4 @@
-import { Newspaper, Book, Film, Music, Utensils, NotebookPen, Home, BookOpen } from "lucide-react"
+import { Newspaper, Book, Film, Music, Utensils, NotebookPen, Home, BookOpen, LayoutDashboard } from "lucide-react"
 
 import {
   Sidebar,
@@ -53,6 +53,11 @@ const items = [
     title: "NoteBook",
     url: "/pages/notebook",
     icon: NotebookPen,
+  },
+  {
+    title: "Sanity",
+    url: "/pages/sanity",
+    icon: LayoutDashboard,
   }
 ]
 

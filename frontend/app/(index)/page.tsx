@@ -121,7 +121,6 @@ export default async function Home() {
             src="http://127.0.0.1:8050/"
             title="Dash Analytics"
          />
-         <iframe src="https://www.sanity.io/@oFCNJJc5a/studio/ddtc02re6i7yi70ew5u1zreo/default/structure" frameBorder="0" className="w-full h-[600px] border-none bg-white"></iframe>
       </div>
     </div>
   );
