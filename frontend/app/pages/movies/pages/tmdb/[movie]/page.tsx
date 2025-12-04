@@ -2,6 +2,8 @@ import FetchTMDBMovie from "../api/FetchTMDBMovie";
 import TMDBMovie from "../components/tmdb_movie";
 
 
+export const revalidate = 3600; // 1 hour
+
 export default async function MoviePage({ 
   params 
 }: { 

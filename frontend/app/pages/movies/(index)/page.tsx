@@ -6,6 +6,8 @@ import MovieToggle from "./components/toggle";
 import { MovieModel } from "./models/MovieModel";
 
 
+export const revalidate = 3600; // 1 hour
+
 export default async function Movies(props: {
   searchParams?: Promise<{
     movie_type?: string

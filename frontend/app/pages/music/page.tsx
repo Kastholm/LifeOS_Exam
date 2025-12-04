@@ -2,6 +2,8 @@ import { fetchMusic } from "./api/fetchMusic";
 import { Music as MusicIcon, Info } from "lucide-react";
 import Link from "next/link";
 
+export const revalidate = 3600; // 1 hour
+
 export default async function Music() {
   const data = await fetchMusic();
   const items = data.items || [];

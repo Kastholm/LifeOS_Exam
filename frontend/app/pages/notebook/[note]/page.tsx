@@ -51,6 +51,8 @@ const components: PortableTextComponents = {
     },
 };
 
+export const revalidate = 3600; // 1 hour
+
 export default async function SingularNote({ params }: { params: { note: string } }) {
     
     const { note: noteId } = await params

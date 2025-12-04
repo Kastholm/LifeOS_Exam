@@ -1,6 +1,8 @@
 import fetchDbpedia from "../api/fetchDbpedia";
 import MovieDetails from "../components/dbpedia_details";
 
+export const revalidate = 3600; // 1 hour
+
 export default async function MoviePage({ 
   searchParams 
 }: { 

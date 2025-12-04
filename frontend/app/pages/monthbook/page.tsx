@@ -3,6 +3,8 @@ import {MONTHBOOKS_QUERY} from './api/fetchMonth'
 import { MonthModel } from './model/month'
 import AllMonths from './components/all_months'
 
+export const revalidate = 3600; // 1 hour
+
 export default async function PostIndex() {
 
   

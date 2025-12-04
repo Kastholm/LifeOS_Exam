@@ -5,6 +5,8 @@ import { PortableText, PortableTextComponents } from "@portabletext/react";
 import Link from "next/link";
 
 
+export const revalidate = 3600; // 1 hour
+
 const components: PortableTextComponents = {
     block: {
         h1: ({children}) => <h1 className="text-3xl font-bold mt-8 mb-4 text-foreground">{children}</h1>,

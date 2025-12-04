@@ -3,6 +3,7 @@ import {BOOKS_QUERY} from '@/app/pages/books/api/FetchSanityBooks'
 import { BookModel } from '@/app/pages/books/models/sanity_book'
 import { BookOpen, Info } from 'lucide-react'
 import Link from 'next/link'
+export const revalidate = 3600; // 1 hour
 
 export default async function AllBooks(props: { books: BookModel[] }) {
 

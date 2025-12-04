@@ -3,6 +3,8 @@ import FetchGoogleBook from "../../../api/FetchGoogleBook";
 import GoogleBook from "../../../components/google_book";
 import { GoogleBookModel } from "../../../models/google_book";
 
+export const revalidate = 3600; // 1 hour
+
 export default async function GoogleBookPage({ params }: { params: { book: string } }) {
   const { book: title } = await params;
   

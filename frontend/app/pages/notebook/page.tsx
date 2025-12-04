@@ -4,6 +4,8 @@ import { NoteModel } from './models/note'
 import { FileText, Info } from 'lucide-react'
 import Link from 'next/link'
 
+export const revalidate = 3600; // 1 hour
+
 export default async function AllNotes() {
     const notes: NoteModel[] = await client.fetch(NOTES_QUERY)
     
