@@ -1,4 +1,4 @@
-import { Newspaper, Book, Film, Music, Utensils, NotebookPen, Home, BookOpen, LayoutDashboard } from "lucide-react"
+import { Newspaper, Book, Film, Music, Utensils, NotebookPen, Home, BookOpen, LayoutDashboard, Calendar } from "lucide-react"
 
 import {
   Sidebar,
@@ -18,6 +18,11 @@ const items = [
     title: "Home",
     url: "/",
     icon: Home,
+  },
+  {
+    title: "Calendar",
+    url: "/pages/calendar",
+    icon: Calendar,
   },
   {
     title: "News",

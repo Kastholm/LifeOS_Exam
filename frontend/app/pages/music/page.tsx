@@ -1,15 +1,35 @@
 import { fetchMusic } from "./api/fetchMusic";
 import { Music as MusicIcon, Info } from "lucide-react";
 import Link from "next/link";
+import MusicScroll from "./components/scroll";
 
 export const revalidate = 3600; // 1 hour
 
-export default async function Music() {
-  const data = await fetchMusic();
+export default async function Music(props: {
+  searchParams?: Promise<{
+    music_limit?: string
+  }>;
+}) {
+  const searchParams = await props.searchParams;
+  const limit = searchParams?.music_limit || '50';
+  const data = await fetchMusic(limit);
   const items = data.items || [];
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <div className="mb-12">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2 bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                Musik
+              </h1>
+              <p className="text-muted-foreground text-sm uppercase tracking-wider">
+                Min playliste
+              </p>
+            </div>
+            <MusicScroll />
+          </div>
+        </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {items.map((item: any, index: number) => {
           const snippet = item.snippet;

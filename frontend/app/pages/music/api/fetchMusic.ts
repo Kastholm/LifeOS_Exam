@@ -1,28 +1,55 @@
-export async function fetchMusic() {
+export async function fetchMusic(limit: string = "50") {
     const url = "https://www.googleapis.com/youtube/v3/playlistItems";
+    const targetCount = parseInt(limit);
+    let allItems: any[] = [];
+    let nextPageToken = "";
     
-    const params = new URLSearchParams({
-        part: "snippet,contentDetails",
-        playlistId: "PLkZ_a_mCRqgJAbwF2cNqJ5sVXwKalgLMK",
-        maxResults: "50",
-        key: process.env.YOUTUBE_API_KEY!
-    });
+    while (allItems.length < targetCount) {
 
-    try {
-        const res = await fetch(`${url}?${params.toString()}`, {
-            next: { revalidate: 3600 } // Cache i 1 time for at spare på kvoten
-        });
+        const remaining = targetCount - allItems.length;
+        const fetchSize = Math.min(remaining, 50);
 
-        if (!res.ok) {
-            const errorData = await res.json();
-            console.error("YouTube API Error:", errorData);
-            return { items: [] }; // Returner tom liste ved fejl, men log fejlen
+        const params: Record<string, string> = {
+            part: "snippet,contentDetails",
+            playlistId: "PLkZ_a_mCRqgJAbwF2cNqJ5sVXwKalgLMK",
+            maxResults: fetchSize.toString(),
+            key: process.env.YOUTUBE_API_KEY!
+        };
+
+        if (nextPageToken) {
+            params.pageToken = nextPageToken;
         }
 
-        const data = await res.json();
-        return data;
-    } catch (error) {
-        console.error("Fetch error:", error);
-        return { items: [] };
+        try {
+            const queryString = new URLSearchParams(params).toString();
+            const res = await fetch(`${url}?${queryString}`, {
+                next: { revalidate: 3600 } // Cache i 1 time
+            });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                console.error("YouTube API Error:", errorData);
+                break; 
+            }
+
+            const data = await res.json();
+            
+            if (data.items) {
+                allItems = [...allItems, ...data.items];
+            }
+
+            // Hvis der ikke er flere sider, stop
+            if (!data.nextPageToken) {
+                break;
+            }
+
+            nextPageToken = data.nextPageToken;
+
+        } catch (error) {
+            console.error("Fetch error:", error);
+            break;
+        }
     }
+
+    return { items: allItems };
 }
