@@ -10,16 +10,20 @@ const authentication = {
   "trakt-api-key": trakt_values.id!
 }
 
-export default async function FetchWatchList({type} : {type: string}) {
+export default async function FetchWatchList({type, limit} : {type: string, limit: number}) {
 
   if(!type) {
     type = 'history'
   }
+  if(!limit) {
+    limit = 50
+  }
   console.log(type)
+  console.log(limit)
   let watchlist = []
   try{
     const res = await fetch(
-      `https://api.trakt.tv/users/${trakt_values.user}/${type}/movies?limit=50&extended=images`, 
+      `https://api.trakt.tv/users/${trakt_values.user}/${type}/movies?limit=${limit}&extended=images`, 
       {
       headers: authentication
       }

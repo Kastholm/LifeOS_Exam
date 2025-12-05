@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import FetchWatchList from "./api/FetchTraktMovies";
 import Movie from "./components/movie";
 import MovieToggle from "./components/toggle";
+import MovieScroll from "./components/scroll";
 import { MovieModel } from "./models/MovieModel";
 
 
@@ -10,12 +11,14 @@ export const revalidate = 3600; // 1 hour
 
 export default async function Movies(props: {
   searchParams?: Promise<{
-    movie_type?: string
+    movie_type?: string,
+    movie_limit?: string
   }>;
 }) {
   const searchParams = await props.searchParams;
   const type = searchParams?.movie_type || 'watchlist';
-  const watchlist: MovieModel[] = await FetchWatchList({ type });
+  const limit = searchParams?.movie_limit || '50'
+  const watchlist: MovieModel[] = await FetchWatchList({ type, limit });
   
   return (
     <div className="container mx-auto px-4 py-8">
@@ -30,6 +33,7 @@ export default async function Movies(props: {
             </p>
           </div>
           <MovieToggle />
+          <MovieScroll />
         </div>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4">
