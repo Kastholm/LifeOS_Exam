@@ -56,6 +56,17 @@ export default function AllRecipes(props: { recipes: RecipeModel[] }) {
 
                             <div className="flex items-center justify-end">
                                 <Link 
+                                    href={`/pages/sanity/structure/mad;opskrifter;${recipe._id}`}
+                                    className="flex items-center justify-center w-9 h-9 mr-2 rounded-lg bg-background/90 backdrop-blur-sm border border-white/20 hover:bg-background hover:scale-110 transition-all duration-200 group/link shadow-lg"
+                                    title="Se på Sanity"
+                                >
+                                    <img 
+                                        src="https://upload.wikimedia.org/wikipedia/commons/9/95/Sanity-square-logo.png" 
+                                        alt="Sanity logo" 
+                                        className="w-4 h-4 object-contain"
+                                    />
+                                </Link>
+                                <Link 
                                     href={`/pages/food/${recipe._id}`}
                                     className="flex items-center justify-center h-9 px-3.5 rounded-lg bg-white/90 backdrop-blur-md border border-white/40 hover:bg-white/30 hover:border-white/50 transition-all duration-300 shadow-lg hover:shadow-xl group/button"
                                 >

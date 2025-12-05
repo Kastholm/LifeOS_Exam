@@ -8,7 +8,7 @@ export const revalidate = 3600; // 1 hour
 export default async function AllBooks(props: { books: BookModel[] }) {
 
     const GOOGLE_LOGO = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png";
-
+    const SANITY_LOGO = "https://upload.wikimedia.org/wikipedia/commons/9/95/Sanity-square-logo.png";
     const books: BookModel[] = await client.fetch(BOOKS_QUERY)
     return (
         <div className="container mx-auto px-4 py-8">
@@ -77,6 +77,18 @@ export default async function AllBooks(props: { books: BookModel[] }) {
                                         />
                                     </Link>
                                 </div>
+
+                                <Link 
+                                    href={`/pages/sanity/structure/boger;${book._id}`}
+                                    className="flex items-center justify-center w-9 h-9 rounded-lg bg-background/90 backdrop-blur-sm border border-white/20 hover:bg-background hover:scale-110 transition-all duration-200 group/link shadow-lg"
+                                    title="Se på Sanity"
+                                >
+                                    <img 
+                                        src={SANITY_LOGO} 
+                                        alt="Sanity logo" 
+                                        className="w-4 h-4 object-contain"
+                                    />
+                                </Link>
 
                         <Link 
                             href={`/pages/books/pages/sanity/${book?.number}`}

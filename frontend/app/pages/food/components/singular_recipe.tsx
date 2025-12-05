@@ -25,12 +25,26 @@ const components: PortableTextComponents = {
 export default function SingularRecipe({ recipe }: { recipe: RecipeModel }) {
     return (
         <div className="container mx-auto px-4 py-8 max-w-6xl">
-            <Link 
-                href="/pages/food"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
-            >
-                ← Tilbage til alle opskrifter
-            </Link>
+            <div className="flex items-center justify-between mb-6">
+                <Link 
+                    href="/pages/food"
+                    className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                    ← Tilbage til alle opskrifter
+                </Link>
+
+                <Link 
+                    href={`/pages/sanity/structure/mad;opskrifter;${recipe._id}`}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-card border border-border hover:bg-muted/80 transition-all duration-200 shadow-sm hover:shadow-md group"
+                >
+                    <img 
+                        src="https://upload.wikimedia.org/wikipedia/commons/9/95/Sanity-square-logo.png" 
+                        alt="Sanity" 
+                        className="w-4 h-4 opacity-90 group-hover:opacity-100 transition-opacity" 
+                    />
+                    <span className="text-sm font-medium text-foreground/80 group-hover:text-foreground">Rediger</span>
+                </Link>
+            </div>
             
             <article className="rounded-2xl border border-border/60 shadow-lg overflow-hidden bg-card">
                 <div className="h-1 w-full bg-linear-to-r from-primary/70 via-primary to-primary/60" />

@@ -79,13 +79,27 @@ export default async function SingularBook({ params }: { params: { book: string 
             )}
 
             <div className="container mx-auto px-4 py-8 max-w-6xl">
-                {/* Tilbage link */}
-                <Link 
-                    href="/pages/books"
-                    className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
-                >
-                    ← Tilbage til alle bøger
-                </Link>
+                {/* Navigation */}
+                <div className="flex items-center justify-between mb-6">
+                    <Link 
+                        href="/pages/books"
+                        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                        ← Tilbage til alle bøger
+                    </Link>
+
+                    <Link 
+                        href={`/pages/sanity/structure/boger;${book._id}`}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-card border border-border hover:bg-muted/80 transition-all duration-200 shadow-sm hover:shadow-md group"
+                    >
+                        <img 
+                            src="https://upload.wikimedia.org/wikipedia/commons/9/95/Sanity-square-logo.png" 
+                            alt="Sanity" 
+                            className="w-4 h-4 opacity-90 group-hover:opacity-100 transition-opacity" 
+                        />
+                        <span className="text-sm font-medium text-foreground/80 group-hover:text-foreground">Rediger</span>
+                    </Link>
+                </div>
 
                 {/* Header med bogcover */}
                 <div className="mb-8">
