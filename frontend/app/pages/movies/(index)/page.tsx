@@ -17,7 +17,7 @@ export default async function Movies(props: {
 }) {
   const searchParams = await props.searchParams;
   const type = searchParams?.movie_type || 'watchlist';
-  const limit = searchParams?.movie_limit || '50'
+  const limit = parseInt(searchParams?.movie_limit || '50');
   const watchlist: MovieModel[] = await FetchWatchList({ type, limit });
   
   return (
