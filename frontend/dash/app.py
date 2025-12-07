@@ -89,9 +89,6 @@ def fetch_books_data():
         if df.empty:
              return pd.DataFrame(columns=['status', 'count'])
 
-        # 'completed' logic: In frontend it checks: book.completed === "true"
-        # Sanity might return it as a string "true"/"false" or boolean depending on schema.
-        # We handle both string "true" and boolean True.
         def get_status(val):
             if str(val).lower() == 'true':
                 return 'Læst'
@@ -109,7 +106,7 @@ def fetch_books_data():
 
 # --- Dash App Setup ---
 
-app = dash.Dash(__name__, suppress_callback_exceptions=True)
+app = dash.Dash(__name__, suppress_callback_exceptions=True, routes_pathname_prefix="/dash/", requests_pathname_prefix="/dash/",)
 server = app.server
 
 app.layout = html.Div([
@@ -120,7 +117,7 @@ app.layout = html.Div([
         
         # Navigation
         html.Nav([
-            dcc.Link('Film Statistik', href='/', style={
+            dcc.Link('Film Statistik', href='/dash/', style={
                 'marginRight': '20px', 
                 'fontSize': '18px', 
                 'textDecoration': 'none',
@@ -129,7 +126,7 @@ app.layout = html.Div([
                 'border': '1px solid #eaeaea',
                 'borderRadius': '5px'
             }),
-            dcc.Link('Bog Statistik', href='/books', style={
+            dcc.Link('Bog Statistik', href='/dash/books', style={
                 'fontSize': '18px', 
                 'textDecoration': 'none',
                 'color': '#0070f3',
@@ -149,7 +146,7 @@ app.layout = html.Div([
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
-    if pathname == '/books':
+    if pathname == '/dash/books':
         # Side 2: Bøger Pie Chart
         df = fetch_books_data()
         
