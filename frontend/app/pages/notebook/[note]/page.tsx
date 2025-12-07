@@ -4,7 +4,6 @@ import { NoteModel } from "../models/note"
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import Link from "next/link";
 import imageUrlBuilder from '@sanity/image-url'
-
 const builder = imageUrlBuilder(client)
 
 function urlFor(source: any) {
