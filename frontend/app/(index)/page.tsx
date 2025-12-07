@@ -118,7 +118,7 @@ export default async function Home() {
          </div>
          <iframe 
             className="w-full h-[600px] border-none bg-white" 
-            src="http://127.0.0.1:8050/"
+            src="https://lifesos.app/dash/"
             title="Dash Analytics"
          />
       </div>
