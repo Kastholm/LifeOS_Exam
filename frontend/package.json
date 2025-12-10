@@ -22,7 +22,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.552.0",
-    "next": "16.0.1",
+    "next": "^16.0.8",
     "next-sanity": "^11.6.8",
     "node-ical": "^0.22.1",
     "pm2": "^6.0.14",
